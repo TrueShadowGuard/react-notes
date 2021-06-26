@@ -8,3 +8,20 @@ body {
   background-color: #333;
 }
 
+.btn-success {
+  background-color: gold;
+  border-color: gold;
+  color: black;
+}
+
+.btn-check:focus + .btn-success, .btn-success:focus {
+  color: #fff;
+  background-color: goldenrod;
+  border-color: goldenrod;
+  box-shadow: 0 0 0 0.25rem darkgoldenrod;
+}
+
+.btn-success:hover {
+  background-color: goldenrod;
+}
+

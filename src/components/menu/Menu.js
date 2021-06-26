@@ -3,27 +3,11 @@ import downloadTextFile from "../../utils/downloadTextFile";
 import notesStore from "../../state/notesStore";
 
 const Menu = () => {
-  const fileInputRef = React.useRef();
-
-  React.useEffect(() => {
-    function onChange(e) {
-      const file = e.target.files[0];
-      const fr = new FileReader();
-      fr.readAsText(file);
-      fr.onloadend = () => {
-        const text = fr.result
-        const json = JSON.parse(text);
-        if (json.notes && json.tags) showFile(json);
-      }
-    }
-
-    fileInputRef.current.addEventListener('change', onChange);
-    return () => fileInputRef.current.removeEventListener('change', onChange);
-  }, [])
+  const inputRef = React.useRef();
 
   return (
     <div className="d-flex justify-content-start w-100">
-      <input type="file" ref={fileInputRef} hidden/>
+      <input type="file" hidden onChange={onChange} ref={inputRef}/>
       <button className="btn btn-light m-2" onClick={handleOpenFile}>
         <strong>Open file</strong>
       </button>
@@ -36,6 +20,19 @@ const Menu = () => {
     </div>
   );
 
+  function onChange(e) {
+    console.log('changed')
+    const file = e.target.files[0];
+    const fr = new FileReader();
+    fr.readAsText(file);
+    fr.onloadend = () => {
+      const text = fr.result
+      const json = JSON.parse(text);
+      if (json.notes && json.tags) showFile(json);
+      e.target.value = '';
+    }
+  }
+
   function handleSaveFile() {
     const text = encodeURIComponent(JSON.stringify({notes: notesStore.notes, tags: notesStore.tags}));
     console.log(text)
@@ -43,7 +40,7 @@ const Menu = () => {
   }
 
   function handleOpenFile() {
-    fileInputRef.current.click()
+    inputRef.current.click()
   }
 
   function handleCreateNote() {
@@ -51,6 +48,7 @@ const Menu = () => {
   }
 
   function showFile(json) {
+    console.log('showFile', json)
     notesStore.setNotes(json.notes)
     notesStore.setTags(json.tags)
   }
