@@ -1,0 +1,17 @@
+.tag {
+  transition: all 0.4s;
+  margin: 4px;
+  padding: 5px 20px;
+  text-align: center;
+  background-color: #eee;
+  box-shadow: none;
+  font-weight: bold;
+  border-radius: 15px;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: gold;
+  box-shadow: gold 0 0 10px 0.1px;
+}

@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {observer} from "mobx-react-lite";
 
-function App() {
+import notesStore from './state/notesStore'
+
+import Note from "./components/note/Note";
+import Tags from "./components/tags/Tags";
+import Menu from "./components/menu/Menu";
+
+
+const App = observer(() => {
+
+  const selectedTags = notesStore.tags.filter(tag => tag.selected)
+
+  const notes = notesStore.notes
+    .filter(note => selectedTags.every(tag => note.tags.includes(tag.text)))
+    .map(note => <Note note={note} key={note.id}/>
+    )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="d-flex flex-column align-items-center flex-wrap">
+      <Menu />
+      <Tags tags={notesStore.tags}/>
+      {notes}
     </div>
   );
-}
+});
 
 export default App;
