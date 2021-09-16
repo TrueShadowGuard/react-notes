@@ -9,4 +9,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
 })
 
-app.listen(80, () => console.log('server started'))
+app.listen(process.env.PORT || 80, () => console.log('server started'))
