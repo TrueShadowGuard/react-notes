@@ -2,18 +2,13 @@ import React from 'react';
 import s from './note.module.scss';
 import notesStore from '../../state/notesStore';
 import {observer} from "mobx-react-lite";
+import TextArea from "../highlightning_textarea/TextArea";
 
 const Note = observer(({note}) => {
 
-  const [value, setValue] = React.useState(note.text)
-
   return (
     <div className={s.note}>
-      <textarea className={s.textarea}
-                value={value}
-                onChange={e => setValue(e.target.value)}
-                onBlur={handleEdit}
-      />
+      <TextArea handleChange={handleEdit} value={note.text}/>
       <div className={s.deleteBtn} onClick={handleDelete}>❌</div>
     </div>
   );
@@ -22,9 +17,8 @@ const Note = observer(({note}) => {
     notesStore.deleteNote(note.id)
   }
 
-  function handleEdit() {
-    console.log('edit')
-    notesStore.editNote(note.id, value)
+  function handleEdit(e) {
+    notesStore.editNote(note.id, e.target.value)
   }
 });
 

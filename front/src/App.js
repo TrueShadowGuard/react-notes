@@ -6,6 +6,8 @@ import notesStore from './state/notesStore'
 import Note from "./components/note/Note";
 import Tags from "./components/tags/Tags";
 import Menu from "./components/menu/Menu";
+import TextArea from "./components/highlightning_textarea/TextArea";
+import ScrollBar from "react-custom-scrollbars";
 
 
 const App = observer(() => {
@@ -18,11 +20,13 @@ const App = observer(() => {
     )
 
   return (
-    <div className="d-flex flex-column align-items-center flex-wrap">
-      <Menu />
-      <Tags tags={notesStore.tags}/>
-      {notes}
-    </div>
+    <ScrollBar width="100%" height="100%" color="white">
+      <div className="d-flex flex-column align-items-center flex-wrap h-100">
+        <Menu/>
+        <Tags tags={notesStore.tags}/>
+        {notes}
+      </div>
+    </ScrollBar>
   );
 });
 
