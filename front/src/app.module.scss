@@ -1,0 +1,15 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.notes {
+  width: 100%;
+  height: auto;
+  flex-grow: 1;
+}
+
+.footer {
+  margin-bottom: 20px;
+}

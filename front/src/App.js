@@ -2,12 +2,12 @@ import React from 'react';
 import {observer} from "mobx-react-lite";
 
 import notesStore from './state/notesStore'
-
 import Note from "./components/note/Note";
 import Tags from "./components/tags/Tags";
 import Menu from "./components/menu/Menu";
-import TextArea from "./components/highlightning_textarea/TextArea";
 import ScrollBar from "react-custom-scrollbars";
+
+import s from './app.module.scss';
 
 
 const App = observer(() => {
@@ -20,13 +20,19 @@ const App = observer(() => {
     )
 
   return (
-    <ScrollBar width="100%" height="100%" color="white">
-      <div className="d-flex flex-column align-items-center flex-wrap h-100">
+    <div className={s.app}>
+      <header className={s.header}>
         <Menu/>
-        <Tags tags={notesStore.tags}/>
-        {notes}
+      </header>
+      <div className={s.notes}>
+        <ScrollBar width="100%" height="100%">
+          {notes}
+        </ScrollBar>
       </div>
-    </ScrollBar>
+      <footer className={s.footer}>
+        <Tags tags={notesStore.tags}/>
+      </footer>
+    </div>
   );
 });
 
