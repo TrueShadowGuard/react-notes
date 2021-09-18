@@ -24,9 +24,11 @@ const App = observer(() => {
       <header className={s.header}>
         <Menu/>
       </header>
-      <div className={s.notes}>
+      <div className={s.notesContainer}>
         <ScrollBar width="100%" height="100%">
-          {notes}
+          <ul className={s.notes}>
+            {notes.map(note => <li>{note}</li>)}
+          </ul>
         </ScrollBar>
       </div>
       <footer className={s.footer}>

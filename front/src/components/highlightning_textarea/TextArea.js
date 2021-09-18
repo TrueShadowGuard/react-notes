@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import s from './textarea.module.css';
 import {useRef} from "react";
-import {useMemo} from "react";
 
 const TextArea = ({value, handleChange}) => {
   const resultRef = useRef();
+  const textAreaRef = useRef();
 
   useEffect(() => {
     const resultValue = !value ? '' : value.replace(/ /g, '&nbsp;')
@@ -18,9 +18,11 @@ const TextArea = ({value, handleChange}) => {
       <div className={s.result} ref={resultRef}/>
       <textarea
         className={s.textarea}
-        onChange={handleChange}
+        onChange={(e) => {
+          if(textAreaRef.current.scrollHeight <= textAreaRef.current.clientHeight) handleChange(e);
+        }}
         value={value}
-        maxLength={200}
+        ref={textAreaRef}
       />
     </div>
   );
