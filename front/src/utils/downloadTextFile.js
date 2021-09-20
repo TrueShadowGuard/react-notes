@@ -1,4 +1,4 @@
-export default function (name: string, value: string) {
+export default function downloadTextFile(name: string, value: string) {
     let val = value;
     if (value === undefined) {
         val = "";

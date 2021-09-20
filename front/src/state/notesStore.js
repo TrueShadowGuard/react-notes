@@ -22,7 +22,7 @@ class NotesStore {
       const tag = this.tags.find(x => x.text === text)
       if (tag) return tag;
       else return {text, selected: false, id: Math.random()};
-    })
+    });
     this.tags = newTags;
   }
 
@@ -62,7 +62,8 @@ class NotesStore {
   }
 
   setNotes(notes) {
-    this.notes = notes.map(note => (note.id = Math.random(), note));
+    notes.forEach(note => note.id = Math.random());
+    this.notes = notes;
   }
 
   setTags(tags) {

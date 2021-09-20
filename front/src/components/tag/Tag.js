@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './tag.module.scss';
 import notesStore from '../../state/notesStore';
-import {observer} from "mobx-react-lite";
 
 const Tag = ({selected, text, id}) => {
   return (

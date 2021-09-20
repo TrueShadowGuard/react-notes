@@ -23,6 +23,7 @@ const App = observer(() => {
     <div className={s.app}>
       <header className={s.header}>
         <Menu/>
+        <br />
       </header>
       <div className={s.notesContainer}>
         <ScrollBar width="100%" height="100%">
